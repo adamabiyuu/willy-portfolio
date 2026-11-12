@@ -34,10 +34,10 @@ export default function Projects({ dark }: ProjectsProps) {
         <div className="mb-10 text-center sm:mb-12">
           <p className="mb-3 text-sm font-semibold uppercase tracking-[0.2em] text-lime-600 dark:text-lime-400">Portfolio</p>
 
-          <h2 className={`text-3xl font-bold tracking-tight sm:text-4xl lg:text-5xl ${dark ? "text-white" : "text-gray-900"}`}>{isProjectsTab ? "Proyek Pilihan" : "Sertifikat"}</h2>
+          <h2 className={`text-3xl font-bold tracking-tight sm:text-4xl lg:text-5xl ${dark ? "text-white" : "text-gray-900"}`}>{isProjectsTab ? "Featured Projects" : "Certificates"}</h2>
 
           <p className={`mx-auto mt-4 max-w-2xl text-base leading-7 ${dark ? "text-gray-400" : "text-gray-600"}`}>
-            {isProjectsTab ? "Beberapa proyek yang telah saya kerjakan untuk mengeksplorasi teknologi dan membangun solusi digital." : "Berbagai sertifikat sebagai bukti pencapaian, pengalaman, dan pengembangan kompetensi saya."}
+            {isProjectsTab ? "Some projects I have worked on to explore technology and build digital solutions." : "Various certificates as proof of my achievements, experience, and competency development."}
           </p>
 
           {/* <p className={`mt-4 text-sm ${dark ? "text-gray-400" : "text-gray-500"}`}>
