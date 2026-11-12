@@ -87,10 +87,6 @@ export default function Contact({ dark }: Props) {
             Kirim Pesan
             <ArrowUpRight size={18} />
           </button>
-
-          <p className={`text-xs leading-5 ${dark ? "text-gray-500" : "text-gray-500"}`}>
-            Pesan akan disiapkan melalui aplikasi email kamu dan dikirim ke <span className="break-all font-medium">{portfolio.email}</span>.
-          </p>
         </form>
 
         {/* Direct email alternative */}

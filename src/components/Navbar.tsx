@@ -49,7 +49,7 @@ export default function Navbar({ dark, onToggleTheme }: NavbarProps) {
             {dark ? <Sun size={18} /> : <Moon size={18} />}
           </button>
 
-          <a href="#kontak" className="inline-flex items-center gap-2 rounded-xl bg-lime-300 px-4 py-3 text-sm font-semibold text-gray-950 transition hover:bg-lime-200">
+          <a href="#contact" className="inline-flex items-center gap-2 rounded-xl bg-lime-300 px-4 py-3 text-sm font-semibold text-gray-950 transition hover:bg-lime-200">
             Contact Me
             <ArrowUpRight size={16} />
           </a>
