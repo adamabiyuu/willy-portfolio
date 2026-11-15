@@ -7,6 +7,7 @@ import Skills from "./sections/Skills";
 import Projects from "./sections/Projects";
 import Experience from "./sections/Experience";
 import Contact from "./sections/Contact";
+import Quote from "./components/Quote";
 
 function App() {
   const [dark, setDark] = useState(true);
@@ -21,6 +22,7 @@ function App() {
         <Skills dark={dark} />
         <Projects dark={dark} />
         <Experience dark={dark} />
+        <Quote dark={dark} />
         <Contact dark={dark} />
       </main>
 

@@ -1,6 +1,6 @@
 import { useState, type FormEvent } from "react";
+import emailjs from "@emailjs/browser";
 import { ArrowUpRight, Mail, Send } from "lucide-react";
-import { portfolio } from "../data/portfolio";
 
 type Props = {
   dark: boolean;
@@ -11,15 +11,56 @@ export default function Contact({ dark }: Props) {
   const [email, setEmail] = useState("");
   const [message, setMessage] = useState("");
 
-  const handleSubmit = (event: FormEvent<HTMLFormElement>) => {
+  const [isSending, setIsSending] = useState(false);
+  const [status, setStatus] = useState<{
+    type: "success" | "error";
+    message: string;
+  } | null>(null);
+
+  const handleSubmit = async (event: FormEvent<HTMLFormElement>) => {
     event.preventDefault();
 
-    const subject = `Portfolio Message from ${name}`;
-    const body = `Name: ${name}\nEmail: ${email}\n\nMessage:\n${message}`;
+    setIsSending(true);
+    setStatus(null);
 
-    const mailtoUrl = `mailto:${portfolio.email}?subject=${encodeURIComponent(subject)}&body=${encodeURIComponent(body)}`;
+    try {
+      const serviceId = import.meta.env.VITE_EMAILJS_SERVICE_ID;
+      const templateId = import.meta.env.VITE_EMAILJS_TEMPLATE_ID;
+      const publicKey = import.meta.env.VITE_EMAILJS_PUBLIC_KEY;
 
-    window.location.href = mailtoUrl;
+      if (!serviceId || !templateId || !publicKey) {
+        throw new Error("Email configuration is incomplete.");
+      }
+
+      await emailjs.send(
+        serviceId,
+        templateId,
+        {
+          from_name: name,
+          reply_to: email,
+          message: message,
+        },
+        publicKey,
+      );
+
+      setStatus({
+        type: "success",
+        message: "Your message has been sent successfully!",
+      });
+
+      setName("");
+      setEmail("");
+      setMessage("");
+    } catch (error) {
+      console.error("Email sending failed:", error);
+
+      setStatus({
+        type: "error",
+        message: "Failed to send your message. Please try again later.",
+      });
+    } finally {
+      setIsSending(false);
+    }
   };
 
   const inputClass = `w-full rounded-xl border px-4 py-3 outline-none transition placeholder:text-gray-400 focus:border-lime-500 focus:ring-2 focus:ring-lime-500/20 ${
@@ -77,17 +118,28 @@ export default function Contact({ dark }: Props) {
             />
           </div>
 
+          {/* Status Message */}
+          {status && (
+            <div role="status" aria-live="polite" className={`rounded-xl p-4 text-sm font-medium ${status.type === "success" ? "bg-green-500/10 text-green-600 dark:text-green-400" : "bg-red-500/10 text-red-600 dark:text-red-400"}`}>
+              {status.message}
+            </div>
+          )}
+
           {/* Submit Button */}
-          <button type="submit" className="inline-flex min-h-12 w-full items-center justify-center gap-2 rounded-xl bg-lime-400 px-6 py-3 font-semibold text-gray-950 transition hover:-translate-y-0.5 hover:bg-lime-300 sm:w-auto">
+          <button
+            type="submit"
+            disabled={isSending}
+            className="inline-flex min-h-12 w-full items-center justify-center gap-2 rounded-xl bg-lime-400 px-6 py-3 font-semibold text-gray-950 transition hover:-translate-y-0.5 hover:bg-lime-300 disabled:cursor-not-allowed disabled:opacity-60 sm:w-auto"
+          >
             <Send size={18} />
-            Send Message
-            <ArrowUpRight size={18} />
+            {isSending ? "Sending..." : "Send Message"}
+            {!isSending && <ArrowUpRight size={18} />}
           </button>
         </form>
 
         {/* Direct Email Alternative */}
         <div className="mt-6 text-center">
-          <a href={`mailto:${portfolio.email}`} className={`inline-flex items-center gap-2 text-sm font-medium transition hover:text-lime-600 ${dark ? "text-gray-400" : "text-gray-600"}`}>
+          <a href={`mailto:${import.meta.env.VITE_CONTACT_EMAIL || ""}`} className={`inline-flex items-center gap-2 text-sm font-medium transition hover:text-lime-600 ${dark ? "text-gray-400" : "text-gray-600"}`}>
             <Mail size={16} />
             Or contact me directly via email
           </a>

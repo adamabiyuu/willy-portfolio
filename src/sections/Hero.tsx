@@ -92,18 +92,18 @@ export default function Hero({ dark }: HeroProps) {
         </div>
 
         {/* Foto kanan */}
-        <div className="relative min-w-0 self-stretch">
-          <div className="relative mx-auto aspect-[4/5] w-full max-w-sm overflow-hidden rounded-3xl border border-gray-200 bg-gray-100 shadow-xl sm:max-w-md md:mx-0 md:ml-auto md:aspect-auto md:h-full md:max-w-none dark:border-gray-800 dark:bg-gray-900">
+        <div className="relative min-w-0">
+          <div className="relative mx-auto aspect-[3/4] w-full max-w-[300px] overflow-hidden rounded-3xl border border-gray-200 bg-gray-100 shadow-xl dark:border-gray-800 dark:bg-gray-900">
             <img
               src="/images/profile.jpg"
               alt={`Foto profil ${portfolio.name}`}
-              className="absolute inset-0 h-full w-full object-cover"
+              className="absolute inset-0 h-full w-full object-contain"
               onError={(event) => {
                 event.currentTarget.style.display = "none";
               }}
             />
 
-            <div className="absolute inset-0 -z-0 flex items-center justify-center text-7xl font-bold text-gray-400">{portfolio.name.charAt(0)}</div>
+            {/* <div className="absolute inset-0 -z-0 flex items-center justify-center text-7xl font-bold text-gray-400">{portfolio.name.charAt(0)}</div> */}
           </div>
         </div>
       </div>
