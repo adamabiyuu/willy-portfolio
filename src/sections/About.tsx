@@ -1,4 +1,5 @@
 import SectionHeading from "../components/SectionHeading";
+import SocialLinks from "../components/SocialLinks";
 
 type Props = {
   dark: boolean;
@@ -13,7 +14,6 @@ const statistics = [
     value: "5+",
     label: "Projects Complete",
   },
-
   {
     value: "0",
     label: "Organizations",
@@ -28,7 +28,13 @@ export default function About({ dark }: Props) {
 
         {/* About Me Description */}
         <div className="mx-auto mt-10 max-w-3xl">
-          <p className={`text-center text-base leading-8 sm:text-lg ${dark ? "text-gray-300" : "text-gray-600"}`} style={{ textAlign: "justify", textAlignLast: "center" }}>
+          <p
+            className={`text-center text-base leading-8 sm:text-lg ${dark ? "text-gray-300" : "text-gray-600"}`}
+            style={{
+              textAlign: "justify",
+              textAlignLast: "center",
+            }}
+          >
             I’m Willyan Imarta, an Informatics Engineering graduate from UIN Maulana Malik Ibrahim Malang with a strong passion for Data Analysis and Data Science. I enjoy transforming raw data into meaningful insights through data
             processing, visualization, and machine learning. With hands-on experience in various data-driven projects, I am proficient in Python, SQL, Excel, and Power BI. I am a fast learner, analytical thinker, and adaptable individual
             who is eager to continuously develop my skills and contribute to solving real-world business problems through data.
@@ -44,6 +50,11 @@ export default function About({ dark }: Props) {
               <p className={`mt-2 text-xs font-medium sm:text-sm ${dark ? "text-gray-400" : "text-gray-600"}`}>{item.label}</p>
             </div>
           ))}
+        </div>
+
+        {/* Social Links */}
+        <div className="mt-12">
+          <SocialLinks />
         </div>
       </div>
     </section>
